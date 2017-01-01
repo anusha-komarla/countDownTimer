@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Count Down Timer</title>
+	<link rel="stylesheet" type="text/css" href="countdown.css">
+</head>
+<body>
+ <div class="container">
+ 	<div class="content">
+ 		<h1 id="days">0</h1>
+ 		<h6>days</h6>
+ 	</div>
+ 	<div class="content">
+ 		<h1 id="hours">0</h1>
+ 		<h6>hours</h6>
+ 	</div>
+ 	<div class="content">
+ 		<h1 id="minutes">0</h1>
+ 		<h6>minutes</h6>
+ 	</div>
+ 	<div class="content">
+ 		<h1 id="seconds">0</h1>
+ 		<h6>seconds</h6>
+ 	</div>
+ </div>
+ <button>click</button>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+ <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+ <script type="text/javascrit" src="countdown.js"></script>
+ <script type="text/javascript">
+ 	$(function(){
+ 		var interval = setInterval(function(){
+ 			Getremainingtime(interval);
+ 		},1000);
+ 		
+ 		$("button").click(function(){ //testing purpose only
+ 			clearInterval(interval);
+ 		});
+ 	});
+
+ 	function Getremainingtime(interval) {
+ 		var end_date = new Date(2016, 11, 31, 23, 59, 59);
+ 		var current_date = new Date();
+ 		var time = new Date().getTime();
+ 		var days = Math.round((end_date.getTime() - time) / (24 * 60 * 60 * 1000));
+ 		if(days <1 ){
+ 			days = 0;
+ 			hours = end_date.getHours() - current_date.getHours();
+ 			if(hours <= 0){
+ 				hours = 0;
+ 				days = 0;
+ 			} 
+ 		}
+ 		else{
+ 			hours = 24 - current_date.getHours();
+ 		}
+ 		if(hours< 1){
+ 			minutes = end_date.getMinutes() - current_date.getMinutes();
+ 			if(minutes <= 0){
+ 				minutes = 0;
+ 			}
+ 		}
+ 		else{
+ 			minutes = 60 - current_date.getMinutes();
+ 		}
+ 		if(minutes< 1){
+ 			seconds = end_date.getSeconds() - current_date.getSeconds();
+ 			if(seconds < 1){
+ 				seconds = 0;
+ 				
+ 			}
+ 		}
+ 		else{
+ 			seconds = 60 - current_date.getSeconds();
+ 		}
+ 		Display(days, hours, minutes, seconds, interval);
+ 	}
+
+ 	function Display(days, hours, minutes, seconds, interval) {
+ 		var end_date = new Date(2016, 11, 31, 23, 59, 59);
+ 		var current_date = new Date();
+ 		if(end_date >= current_date){
+ 			$("#days").html(days);
+ 			$("#hours").html(hours);
+ 			$("#minutes").html(minutes);
+ 			$("#seconds").html(seconds);
+ 		} else{
+ 			clearInterval(interval);
+ 			alert("Happy new year");
+
+ 		}
+ 		
+ 	}
+
+ </script>
+</body>
+</html>

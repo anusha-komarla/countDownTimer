@@ -1,0 +1,13 @@
+.container{
+	height: 100px;
+	width: 350px;
+	background-color: black;
+	color: gray;
+	padding-left: 30px; 
+}
+
+.content{
+	display: inline-block;
+	padding: 5px;
+}
+
